@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Net;
+using System.Text;
 using System.Text.RegularExpressions;
 
 namespace ControlM
@@ -32,20 +33,45 @@ namespace ControlM
         }
 
         public abstract bool IsCluster();
+        public string ToHostEntry(string Comment)
+        {
+            StringBuilder sbHostEntry = new StringBuilder();
+            sbHostEntry.Append(string.Format("{0,-46}{1,-30}# {2}", Machine.IPv4, Machine.FQDN, Comment));
+            if (machine.IPv6 != null)
+            {
+                sbHostEntry.AppendLine();
+                sbHostEntry.Append(string.Format("{0,-46}{1,-30}# {2}", Machine.IPv6, Machine.FQDN, Comment));
+            }
+                
+            return sbHostEntry.ToString();
+        }
     }
 
     public class ClientNode_Standalone : ClientNode
     {
         public ClientNode_Standalone(ClientMachine client)
         {
+            if (client == null)
+            {
+                throw new Exception("Client Object cannot be null.");
+            }
             Machine = client;
         }
         public override bool IsCluster() => false;
+        /// <summary>
+        /// Generate a host entry line
+        /// </summary>
+        /// <returns>a host entry line</returns>
+        
     }
     public class ClientNode_Cluster : ClientNode
     {
         public ClientNode_Cluster(ClientMachine vip, ClientMachine pri, ClientMachine sec)
         {
+            if ((vip == null) || (pri == null) || (sec == null))
+            {
+                throw new Exception("Client Objects cannot be null.");
+            }
             Machine = vip;
             NodeVIP = vip;
             NodePrimary = pri;
@@ -78,6 +104,7 @@ namespace ControlM
         }
 
         public override bool IsCluster() => true;
+
     }
 
     public class ClientMachine
@@ -159,7 +186,7 @@ namespace ControlM
             get { return domain; }
             set
             {
-                Regex QualifiedMatch = new Regex(@"[\.]([A-Za-z0-9]+[\.])+[A-Za-z0-9]+$");
+                Regex QualifiedMatch = new Regex(@"^[\.]([A-Za-z0-9]+[\.])+[A-Za-z0-9]+$");
                 if (!QualifiedMatch.IsMatch(value))
                 {
                     throw new Exception("Domain format error. Either it contains illegal characters or '.' is misused.");
@@ -237,7 +264,7 @@ namespace ControlM
 
         public override string ToString()
         {
-            return String.Format("{0}.{1}.{2}{3}",Major, Minor, Build.ToString().PadLeft(2,'0'), Patch);
+            return String.Format("{0}.{1}.{2} {3}",Major, Minor, Build.ToString().PadLeft(2,'0'), Patch);
         }
 
     }

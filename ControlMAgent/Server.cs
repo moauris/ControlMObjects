@@ -1,9 +1,8 @@
-﻿using ControlM;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace ControlMObjects
+namespace ControlM
 {
     public sealed class Server : Components
     {
