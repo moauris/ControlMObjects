@@ -37,8 +37,8 @@ $Node1.ToHostEntry("Comment")
 $Node2.ToHostEntry("Comment")
 
 #Create two MS Machine Clusters
-$MSVer9 = [ControlM.ControlMVersion]::New([ControlM.VersionOption]::v9018)
-$MSVer7 = [ControlM.ControlMVersion]::New([ControlM.VersionOption]::v7000fp5)
+$MSVer9 = [ControlM.ControlMVersion]::ctlmVer9018()
+$MSVer7 = [ControlM.ControlMVersion]::ctlmVer7000fp5()
 $Server1 = [ControlM.Server]::New(
         $MSVer9,
         [ControlM.ClientMachine]::new(
@@ -57,5 +57,8 @@ $Agent2 = [ControlM.Agent]::new($MSVer7, $Node1, $Server1, 27006)
 $Agent3 = [ControlM.Agent]::new($MSVer9, $Node2, $Server1, 27006)
 
 $Agent1.ToString()
+"$($Agent1.Version)"
 $Agent2.ToString()
+"$($Agent2.Version)"
 $Agent3.ToString()
+"$($Agent3.Version)"
