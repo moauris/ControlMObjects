@@ -200,11 +200,55 @@ namespace ControlM
             get { return hostname + Domain; }
         }
 
-    }
+        #region Methods
 
+        public ClientNode_Standalone ConvertToNode()
+        {
+            return new ClientNode_Standalone(this);
+        }
+        public ClientNode_Cluster ConvertToCluster(ClientMachine primary, ClientMachine secondary)
+        {
+            return new ClientNode_Cluster(this, primary, secondary);
+        }
+        #endregion
+
+    }
+    public enum VersionOption
+    {
+        v7000fp5,
+        v9018
+    }
     public class ControlMVersion
     {
-
+        public ControlMVersion(VersionOption option)
+        {
+            switch (option)
+            {
+                case VersionOption.v7000fp5:
+                    Major = 7;
+                    Minor = 0;
+                    Build = 0;
+                    Patch = "FixPack5";
+                    break;
+                case VersionOption.v9018:
+                    Major = 9;
+                    Minor = 0;
+                    Build = 18;
+                    Patch = "-";
+                    break;
+                default:
+                    break;
+            }
+        }
+        public ControlMVersion(int major, int minor, int build, string patch)
+        {
+            
+            Major = major;
+            Minor = minor;
+            Build = build;
+            Patch = patch;
+                    
+        }
         private int major;
 
         public int Major
