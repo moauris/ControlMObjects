@@ -11,24 +11,28 @@ $Machine1 = [ControlM.ClientMachine]::new(
     "Aur00201",
     ".chenmo.com.cn",
     "192.168.2.201",
-    "fe80::9d72:8896:8498:201")
+    "fe80::9d72:8896:8498:201"
+    [ControlM.OSInfo]::("Microsoft Windows", "Server 2016", "64-bit"))
 $Node1 = [ControlM.ClientNode_Standalone]::new($Machine1)
 # Three machines with domain and ipv6
 $Machine2 = [ControlM.ClientMachine]::new(
     "Aur00300",
     ".chenmo.com.cn",
     "192.168.3.1",
-    "fe80::9d72:8896:8493:1001")
+    "fe80::9d72:8896:8493:1001",
+    [ControlM.OSInfo]::new("Red Hat Linux Enterprise", "7.1", "64-bit"))
 $Machine3 = [ControlM.ClientMachine]::new(
     "Aur00301",
     ".chenmo.com.cn",
     "192.168.3.2",
-    "fe80::9d72:8896:8493:1002")
+    "fe80::9d72:8896:8493:1002"
+    [ControlM.OSInfo]::new("Red Hat Linux Enterprise", "6.4", "32-bit"))
 $Machine4 = [ControlM.ClientMachine]::new(
     "Aur10302",
     ".chenmo.com.cn",
     "192.168.3.3",
-    "fe80::9d72:8896:8493:1003")
+    "fe80::9d72:8896:8493:1003"
+    [ControlM.OSInfo]::("Microsoft Windows", "10", "64-bit"))
 $Node2 = [ControlM.ClientNode_Cluster]::new($Machine2, $Machine3, $Machine4)
 
 Write-Debug "Testing ToHostEntry Function in Node"
@@ -58,7 +62,10 @@ $Agent3 = [ControlM.Agent]::new($MSVer9, $Node2, $Server1, 27006)
 
 $Agent1.ToString()
 "$($Agent1.Version)"
+"$($Agent1.OSInformation)"
 $Agent2.ToString()
 "$($Agent2.Version)"
+"$($Agent2.OSInformation)"
 $Agent3.ToString()
 "$($Agent3.Version)"
+"$($Agent3.OSInformation)"

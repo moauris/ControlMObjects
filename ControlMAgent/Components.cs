@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Net;
+using System.Runtime.InteropServices;
 using System.Text;
 using System.Text.RegularExpressions;
 
@@ -24,6 +25,7 @@ namespace ControlM
 
     public abstract class ClientNode
     {
+
         private ClientMachine machine;
 
         public ClientMachine Machine
@@ -109,27 +111,32 @@ namespace ControlM
 
     public class ClientMachine
     {
-        public ClientMachine(string hostname, string ipv4)
-        {
-            Hostname = hostname;
-            IPv4 = IPAddress.Parse(ipv4);
-        }
-        public ClientMachine(string hostname, IPAddress ipv4)
+        
+        public ClientMachine(string hostname, IPAddress ipv4, OSInfo oSInfo)
         {
             Hostname = hostname;
             IPv4 = ipv4;
+            OSInformation = oSInfo;
         }
-        public ClientMachine(string hostname, string domain, string ipv4, string ipv6) : this(hostname, ipv4)
-        {
-            Domain = domain;
-            IPv6 = IPAddress.Parse(ipv6);
-        }
-
-        public ClientMachine(string hostname, string domain, IPAddress ipv4, IPAddress ipv6) : this(hostname, ipv4)
+        public ClientMachine(string hostname, string ipv4, OSInfo oSInfo) : this(hostname, IPAddress.Parse(ipv4), oSInfo) { }
+        
+        public ClientMachine(string hostname, string domain, IPAddress ipv4, IPAddress ipv6, OSInfo oSInfo) : this(hostname, ipv4, oSInfo)
         {
             Domain = domain;
             IPv6 = ipv6;
         }
+
+        public ClientMachine(string hostname, string domain, string ipv4, string ipv6, OSInfo oSInfo) :
+            this(hostname, domain, IPAddress.Parse(ipv4), IPAddress.Parse(ipv6), oSInfo) { }
+
+        private OSInfo oSInfo;
+
+        public OSInfo OSInformation
+        {
+            get { return oSInfo; }
+            set { oSInfo = value; }
+        }
+
 
         private IPAddress ipv4;
 
@@ -213,33 +220,17 @@ namespace ControlM
         #endregion
 
     }
-    public enum VersionOption
-    {
-        v7000fp5,
-        v9018
-    }
     public class ControlMVersion
     {
-        public ControlMVersion(VersionOption option)
+        public static ControlMVersion ctlmVer7000fp5()
         {
-            switch (option)
-            {
-                case VersionOption.v7000fp5:
-                    Major = 7;
-                    Minor = 0;
-                    Build = 0;
-                    Patch = "FixPack5";
-                    break;
-                case VersionOption.v9018:
-                    Major = 9;
-                    Minor = 0;
-                    Build = 18;
-                    Patch = "-";
-                    break;
-                default:
-                    break;
-            }
+            return new ControlMVersion(7,0,0,"FixPack5");
         }
+        public static ControlMVersion ctlmVer9018()
+        {
+            return new ControlMVersion(9,0,18,"-");
+        }
+
         public ControlMVersion(int major, int minor, int build, string patch)
         {
             
@@ -308,7 +299,25 @@ namespace ControlM
 
         public override string ToString()
         {
-            return String.Format("{0}.{1}.{2} {3}",Major, Minor, Build.ToString().PadLeft(2,'0'), Patch);
+            return String.Format("{0}.{1}.{2} {3}", Major, Minor, Build.ToString().PadLeft(2,'0'), Patch);
+        }
+
+    }
+
+    public class OSInfo
+    {
+        public OSInfo(string osname, string osverion, string osarchitecture)
+        {
+            OSName = osname;
+            OSVersion = osverion;
+            OSArchitecture = osarchitecture;
+        }
+        public string OSName { get; set; }
+        public string OSVersion { get; set; }
+        public string OSArchitecture { get; set; }
+        public override string ToString()
+        {
+            return string.Format("{0} {1} {2}", OSName, OSVersion, OSArchitecture);
         }
 
     }
