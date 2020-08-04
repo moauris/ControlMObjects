@@ -208,7 +208,14 @@ namespace ControlM
         }
 
         #region Methods
-
+        public static ClientMachine CreateSample()
+        {
+            return new ClientMachine("MO78A121"
+                , ".cn.ibm.com"
+                , "9.200.73.26"
+                , "2001:0:2851:b9f0:340c:3a0f:95d9:ff83"
+                , new OSInfo("Windows","10 Enterprise","64-bit"));
+        }
         public ClientNode_Standalone ConvertToNode()
         {
             return new ClientNode_Standalone(this);

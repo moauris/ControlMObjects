@@ -7,6 +7,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ControlM", "ControlMAgent\C
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ControlM_Manager_GUI", "ControlM_Manager_GUI\ControlM_Manager_GUI.csproj", "{F99544C6-19F8-4F38-91C5-B72899852B4A}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "accessdb_driver", "accessdb_driver\accessdb_driver.csproj", "{D5468EA6-245B-4F6B-8E8E-E13EC06188C1}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{F99544C6-19F8-4F38-91C5-B72899852B4A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F99544C6-19F8-4F38-91C5-B72899852B4A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F99544C6-19F8-4F38-91C5-B72899852B4A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D5468EA6-245B-4F6B-8E8E-E13EC06188C1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D5468EA6-245B-4F6B-8E8E-E13EC06188C1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D5468EA6-245B-4F6B-8E8E-E13EC06188C1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D5468EA6-245B-4F6B-8E8E-E13EC06188C1}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

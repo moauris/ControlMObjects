@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using ControlM;
 
 namespace ControlM
 {
@@ -10,7 +11,6 @@ namespace ControlM
         { }
 
         public int msmaPort { get; set; } = 7005;
-    }
 
 
 
