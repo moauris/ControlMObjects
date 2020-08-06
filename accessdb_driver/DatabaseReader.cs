@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Data.OleDb;
 
-namespace accessdb_driver
+namespace CtlmDBDriver_Access
 {
     public class DatabaseReader
     {

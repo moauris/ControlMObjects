@@ -35,6 +35,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="accessdb_driver">
+      <HintPath>..\accessdb_driver\bin\Debug\accessdb_driver.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
@@ -58,6 +61,12 @@
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="View\MachinePicker.xaml.cs">
+      <DependentUpon>MachinePicker.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\MachinePickerTestWindow.xaml.cs">
+      <DependentUpon>MachinePickerTestWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\MachineViewer.xaml.cs">
       <DependentUpon>MachineViewer.xaml</DependentUpon>
@@ -94,6 +103,14 @@
     <Folder Include="ViewModel\" />
   </ItemGroup>
   <ItemGroup>
+    <Page Include="View\MachinePicker.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\MachinePickerTestWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="View\MachineViewer.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
