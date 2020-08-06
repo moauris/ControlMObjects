@@ -71,6 +71,9 @@
     <Compile Include="View\MachineViewer.xaml.cs">
       <DependentUpon>MachineViewer.xaml</DependentUpon>
     </Compile>
+    <Compile Include="View\MachineWriter.xaml.cs">
+      <DependentUpon>MachineWriter.xaml</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs">
@@ -112,6 +115,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\MachineViewer.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\MachineWriter.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

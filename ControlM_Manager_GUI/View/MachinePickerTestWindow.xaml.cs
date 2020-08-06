@@ -35,7 +35,8 @@ namespace ControlM_Manager_GUI.View
 
         private void OnWriteNewMachine(object sender, RoutedEventArgs e)
         {
-            DatabaseWriter.WriteMachineInfo(ClientMachine.CreateSample());
+            MachineWriter machineWriter = new MachineWriter();
+            machineWriter.Show();
         }
     }
 }
