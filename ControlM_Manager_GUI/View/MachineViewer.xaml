@@ -6,9 +6,9 @@
       xmlns:local="clr-namespace:ControlM_Manager_GUI.View"
       mc:Ignorable="d"
       SizeToContent="WidthAndHeight"
-      Title="MachineViewer" FontSize="22" WindowStyle="None">
+      Title="MachineViewer" FontSize="22" WindowStyle="None"
+      MouseDown="OnMouseDown">
     <Window.Resources>
-        <local:MachineViewer x:Key="mviewer"/>
         <Style x:Name="RowDefs" TargetType="RowDefinition">
             <Setter Property="Height" Value="42"/>
         </Style>
@@ -18,7 +18,7 @@
         <Style x:Name="MonoFont" TargetType="TextBox">
             <Setter Property="FontFamily" Value="Cascadia Code"/>
             <Setter Property="FontSize" Value="22"/>
-            <Setter Property="Grid.ColumnSpan" Value="3"/>
+            <Setter Property="Grid.ColumnSpan" Value="4"/>
             <Setter Property="Grid.Column" Value="2"/>
             <Setter Property="Margin" Value="6"/>
             <Setter Property="VerticalContentAlignment" Value="Center"/>
@@ -34,8 +34,9 @@
             <Setter Property="TextAlignment" Value="Center"/>
         </Style>
     </Window.Resources>
-    <Grid x:Name="OuterWrapper" Width="666" Height="360">
+    <Grid x:Name="OuterWrapper" Width="798" Height="402">
         <Grid.RowDefinitions>
+                <RowDefinition/>
                 <RowDefinition/>
                 <RowDefinition/>
                 <RowDefinition/>
@@ -51,21 +52,25 @@
                 <ColumnDefinition/>
                 <ColumnDefinition/>
                 <ColumnDefinition/>
+                <ColumnDefinition/>
             </Grid.ColumnDefinitions>
-            <Label Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="5" Grid.RowSpan="2"
+            <Label Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="6" Grid.RowSpan="2"
                HorizontalAlignment="Center" FontSize="37" FontWeight="DemiBold">
                 Machine Infomation
             </Label>
-        <TextBox Grid.Row="2" Text="1"/>
+        <TextBox Grid.Row="2" Text="{Binding Hostname,Mode=TwoWay}"/>
         <TextBlock Grid.Row="2">Host Name</TextBlock>
-        <TextBox Grid.Row="3" Text="2"/>
+        <TextBox Grid.Row="3" Text="{Binding Domain,Mode=TwoWay}"/>
         <TextBlock Grid.Row="3">Domain</TextBlock>
-        <TextBox Grid.Row="4" Text="3"/>
+        <TextBox Grid.Row="4" Text="{Binding IPv4,Mode=OneWay}" IsEnabled="False"/>
         <TextBlock Grid.Row="4">IPv4</TextBlock>
-        <TextBox Grid.Row="5" Text="4"/>
+        <TextBox Grid.Row="5" Text="{Binding IPv6,Mode=OneWay}" IsEnabled="False"/>
         <TextBlock Grid.Row="5">IPv6</TextBlock>
+        <TextBox Grid.Row="6" Text="{Binding OSInformation,Mode=OneWay}" IsEnabled="False"/>
+        <TextBlock Grid.Row="6">OS Info</TextBlock>
+        
         <Grid Margin="6" Height="47"
-            Grid.Row="6" Grid.ColumnSpan="5" Grid.RowSpan="2">
+            Grid.Row="7" Grid.ColumnSpan="6" Grid.RowSpan="2">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="5*"/>
                 <ColumnDefinition Width="1*"/>
@@ -75,7 +80,7 @@
             </Grid.ColumnDefinitions>
             <Button Margin="0" Grid.Column="0">save</Button>
             <Button Margin="0" Grid.Column="2">delete</Button>
-            <Button Margin="0" Grid.Column="4">cancel</Button>
+            <Button Margin="0" Grid.Column="4" Click="OnCancel">cancel</Button>
         </Grid>
     </Grid>
         

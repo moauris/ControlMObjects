@@ -20,33 +20,37 @@ namespace ControlM_Manager_GUI.View
     /// <summary>
     /// Interaction logic for MachineViewer.xaml
     /// </summary>
-    public partial class MachineViewer : Window, INotifyPropertyChanged
+    public partial class MachineViewer : Window
     {
         public MachineViewer()
         {
             InitializeComponent();
-            Machine = ClientMachine.CreateSample();
+            DisplayedMachine = ClientMachine.CreateSample(); // for debug
+            DataContext = DisplayedMachine;
         }
         public MachineViewer(ClientMachine machine) : base()
         {
-            Machine = machine;
-        }
-        private ClientMachine machine;
-
-        public ClientMachine Machine
-        {
-            get { return machine; }
-            set
-            {
-                machine = value;
-                OnPropertyChanged("Machine");
-            }
+            DisplayedMachine = machine;
         }
 
-        public event PropertyChangedEventHandler PropertyChanged;
-        private void OnPropertyChanged(string PropertyName)
+        public ClientMachine DisplayedMachine
         {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(PropertyName));
+            get { return (ClientMachine)GetValue(DisplayedMachineProperty); }
+            set { SetValue(DisplayedMachineProperty, value); }
+        }
+
+        // Using a DependencyProperty as the backing store for DisplayedMachine.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty DisplayedMachineProperty =
+            DependencyProperty.Register("DisplayedMachine", typeof(ClientMachine), typeof(MachineViewer), new PropertyMetadata(null));
+
+        private void OnCancel(object sender, RoutedEventArgs e)
+        {
+            this.Close();
+        }
+
+        private void OnMouseDown(object sender, MouseButtonEventArgs e)
+        {
+            this.DragMove();
         }
     }
 }
