@@ -111,9 +111,11 @@ namespace ControlM
 
     public class ClientMachine
     {
+        private MachineInitException machineInitException;
         
         public ClientMachine(string hostname, IPAddress ipv4, OSInfo oSInfo)
         {
+            
             Hostname = hostname;
             IPv4 = ipv4;
             OSInformation = oSInfo;
@@ -208,6 +210,69 @@ namespace ControlM
         }
 
         #region Methods
+        public static MachineParm ValidateParms(string hostname, string domain, string ipv4, string ipv6, OSInfo oSInfo)
+        {
+
+            MachineParm errorParm = MachineParm.None;
+            #region Check Hostname and Domain
+            //Check hostname is not empty
+            if (hostname == string.Empty)
+            {
+                errorParm |= MachineParm.Hostname;
+            }
+            //Check hostname contains no non word character
+            Regex UnqualifyMatch = new Regex("[^A-Za-z0-9]");
+            if (UnqualifyMatch.IsMatch(hostname))
+            {
+                errorParm |= MachineParm.Hostname;
+            }
+            //Check Domain is not empty
+            if (domain == string.Empty)
+            {
+                errorParm |= MachineParm.Domain;
+            }
+            //Check Domain valid syntax
+            Regex QualifiedMatch = new Regex(@"^[\.]([A-Za-z0-9]+[\.])+[A-Za-z0-9]+$");
+            if (!QualifiedMatch.IsMatch(domain))
+            {
+                errorParm |= MachineParm.Domain;
+            }
+            #endregion
+            #region Check IPV4 and IPV6
+            //Checking IPV4 can be initialized
+
+            if (!IPAddress.TryParse(ipv4, out IPAddress ipv4obj))
+            {
+                errorParm |= MachineParm.Ipv4;
+            }
+            else
+            {
+                //if ipv4 can be parsed, check if byte array has 4
+                if (ipv4obj.GetAddressBytes().Length != 4)
+                {
+                    errorParm |= MachineParm.Ipv4;
+                }
+            }
+
+            if (!IPAddress.TryParse(ipv6, out IPAddress ipv6obj))
+            {
+                errorParm |= MachineParm.Ipv6;
+            }
+            else
+            {
+                //if ipv6 can be parsed, check if byte array has 16
+                if (ipv6obj.GetAddressBytes().Length != 16)
+                {
+                    errorParm |= MachineParm.Ipv6;
+                }
+            }
+
+            #endregion
+
+            //OS INFO Waiting to be Implemented
+            return errorParm;
+
+        }
         public static ClientMachine CreateSample()
         {
             return new ClientMachine("MO78A121"

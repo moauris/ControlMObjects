@@ -2,6 +2,7 @@
 using CtlmDBDriver_Access;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
@@ -28,6 +29,7 @@ namespace ControlM_Manager_GUI.View
             InitializeComponent();
         }
 
+        /*
         private void OnValidateClicked(object sender, RoutedEventArgs e)
         {
             try
@@ -41,9 +43,8 @@ namespace ControlM_Manager_GUI.View
                 return;
             }
             btnUpload.IsEnabled = true;
-
-
         }
+        */
 
         private void OnUploadClicked(object sender, RoutedEventArgs e)
         {
@@ -108,6 +109,48 @@ namespace ControlM_Manager_GUI.View
         public static readonly DependencyProperty IPv6Property =
             DependencyProperty.Register("IPv6", typeof(string), typeof(MachineWriter), new PropertyMetadata(string.Empty));
 
-        
+        private void ValidateTextBox(MachineParm errParm, MachineParm compareParm, TextBox txb)
+        {
+            Debug.Print($"Checking Parameter Enum: {compareParm} value is {errParm.ToString()}");
+            Debug.Print($"Is error? : {(errParm & compareParm) == compareParm}");
+            bool TestResult = (errParm & compareParm) == compareParm;
+            Debug.Print($"Is error? : {TestResult}");
+            if (TestResult)
+            {
+                Debug.Print("Setting to Invalid style");
+                txb.Style = (Style)Resources["TextBoxStyle_Invalid"];
+            }
+            else
+            {
+                Debug.Print("Setting to normal style");
+                txb.Style = (Style)Resources["MonoFont"];
+            }
+        }
+        private void OnValidateTxb(object sender, RoutedEventArgs e)
+        {
+            TextBox txb = sender as TextBox;
+
+
+            MachineParm errParm = ClientMachine.ValidateParms(Hostname, Domain, IPv4, IPv6, new OSInfo("AIX", "7,1", "64-bit"));
+            switch (txb.Name)
+            {
+                case "tbxHostname":
+                    ValidateTextBox(errParm, MachineParm.Hostname, txb);
+                    break;
+                case "tbxDomain":
+                    ValidateTextBox(errParm, MachineParm.Domain, txb);
+                    break;
+                case "tbxIPv4":
+                    ValidateTextBox(errParm, MachineParm.Ipv4, txb);
+                    break;
+                case "tbxIPv6":
+                    ValidateTextBox(errParm, MachineParm.Ipv6, txb);
+                    break;
+                default:
+                    break;
+            }
+
+            btnUpload.IsEnabled = true;
+        }
     }
 }
