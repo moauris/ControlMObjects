@@ -4,19 +4,34 @@
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-      xmlns:local="clr-namespace:ControlM_Manager_GUI.View"
+      xmlns:view="clr-namespace:ControlM_Manager_GUI.View"
+      xmlns:model="clr-namespace:ControlM_Manager_GUI.Model"
       mc:Ignorable="d"
       SizeToContent="WidthAndHeight"
-      Title="MachineViewer" FontSize="22" WindowStyle="None"
+      Title="MachineWriter" FontSize="22" WindowStyle="None"
       MouseDown="OnMouseDown">
     <Window.Resources>
+        <ControlTemplate x:Key="ValidationTemplate">
+            <DockPanel>
+                <TextBlock Background="DarkRed" Foreground="White">X</TextBlock>
+                <AdornedElementPlaceholder/>
+            </DockPanel>
+        </ControlTemplate>
         <Style x:Name="RowDefs" TargetType="RowDefinition">
             <Setter Property="Height" Value="42"/>
         </Style>
         <Style x:Name="ColDefs" TargetType="ColumnDefinition">
             <Setter Property="Width" Value="132"/>
         </Style>
-        <Style x:Name="MonoFont" TargetType="TextBox">
+        <Style x:Key="MonoFontTxbBase" TargetType="{x:Type TextBox}">
+            <Style.Triggers>
+                <Trigger Property="Validation.HasError" Value="true">
+                    <!--Setter Property="ToolTip" Value="{Binding RelativeSource={x:Static RelativeSource.Self}, Path=(Validation.Errors)/ErrorContent}"/-->
+                    <Setter Property="Foreground" Value="LightPink"/>
+                    <Setter Property="Background" Value="DarkRed"/>
+                </Trigger>
+            </Style.Triggers>
+            <Setter Property="Validation.ErrorTemplate" Value="{StaticResource ValidationTemplate}"/>
             <Setter Property="FontFamily" Value="Cascadia Code"/>
             <Setter Property="FontSize" Value="22"/>
             <Setter Property="Grid.ColumnSpan" Value="4"/>
@@ -59,15 +74,55 @@
                HorizontalAlignment="Center" FontSize="37" FontWeight="DemiBold">
             新規ノードを追加
         </Label>
-        <TextBox Grid.Row="2" Text="{Binding Hostname,Mode=TwoWay}"/>
+        <TextBox Grid.Row="2" Style="{StaticResource MonoFontTxbBase}">
+            <TextBox.Text>
+                <Binding Path="Hostname"
+                         UpdateSourceTrigger="PropertyChanged">
+                    <Binding.ValidationRules>
+                        <model:MachinViewerTxbRule 
+                            RegexString="^[A-Za-z]{3,}[A-Za-z0-9]{5,27}$"
+                            ErrorMessage="HostName Syntax: First 3 digits must be alphabets, followed by alphanumeric combo, max length is 37"/>
+                    </Binding.ValidationRules>
+                </Binding>
+            </TextBox.Text>
+        </TextBox>
         <TextBlock Grid.Row="2">Host Name</TextBlock>
-        <TextBox Grid.Row="3" Text="{Binding Domain,Mode=TwoWay}"/>
+        <TextBox Grid.Row="3" Style="{StaticResource MonoFontTxbBase}">
+            <TextBox.Text>
+                <Binding Path="Domain" Mode="TwoWay"
+                         UpdateSourceTrigger="PropertyChanged">
+                    <Binding.ValidationRules>
+                        <model:MachinViewerTxbRule 
+                            RegexString="^\.([A-Za-z]+\.)+[A-Za-z]+$"
+                            ErrorMessage="Domain Syntax: Must Start with a '.' character, with alphanumeric combo separated with single '.'s; cannot end with '.'s."/>
+                    </Binding.ValidationRules>
+                </Binding>
+            </TextBox.Text>
+        </TextBox>
         <TextBlock Grid.Row="3">Domain</TextBlock>
-        <TextBox Grid.Row="4" Text="{Binding IPv4,Mode=TwoWay}"/>
+        <TextBox Grid.Row="4" Style="{StaticResource MonoFontTxbBase}">
+            <TextBox.Text>
+                <Binding Path="IPv4" Mode="TwoWay"
+                         UpdateSourceTrigger="PropertyChanged">
+                    <Binding.ValidationRules>
+                        <model:MachineViewerIPRule CheckMode="v4"/>
+                    </Binding.ValidationRules>
+                </Binding>
+            </TextBox.Text>
+        </TextBox>
         <TextBlock Grid.Row="4">IPv4</TextBlock>
-        <TextBox Grid.Row="5" Text="{Binding IPv6,Mode=TwoWay}"/>
+        <TextBox Grid.Row="5" Style="{StaticResource MonoFontTxbBase}">
+            <TextBox.Text>
+                <Binding Path="IPv6" Mode="TwoWay"
+                         UpdateSourceTrigger="PropertyChanged">
+                    <Binding.ValidationRules>
+                        <model:MachineViewerIPRule CheckMode="v6"/>
+                    </Binding.ValidationRules>
+                </Binding>
+            </TextBox.Text>
+        </TextBox>
         <TextBlock Grid.Row="5">IPv6</TextBlock>
-        <TextBox Grid.Row="6" Text="{Binding OSInformation,Mode=TwoWay}"/>
+        <TextBox Grid.Row="6" Text="{Binding OSInformation,Mode=TwoWay}" Style="{StaticResource MonoFontTxbBase}"/>
         <TextBlock Grid.Row="6">OS Info</TextBlock>
 
         <Grid Margin="6" Height="47"

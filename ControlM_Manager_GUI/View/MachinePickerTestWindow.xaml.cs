@@ -14,6 +14,8 @@ using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using ControlM;
 using CtlmDBDriver_Access;
+using System.Diagnostics;
+using System.IO;
 
 namespace ControlM_Manager_GUI.View
 {
@@ -25,6 +27,7 @@ namespace ControlM_Manager_GUI.View
         public MachinePickerTestWindow()
         {
             InitializeComponent();
+            Debug.Print("Printing Current Directory: " + Directory.GetCurrentDirectory());
         }
 
         private void OnPickMachineClicked(object sender, RoutedEventArgs e)
