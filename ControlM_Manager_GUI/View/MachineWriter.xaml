@@ -113,7 +113,11 @@
                 <Binding Path="IPv4" Mode="TwoWay"
                          UpdateSourceTrigger="PropertyChanged">
                     <Binding.ValidationRules>
-                        <model:MachineViewerIPRule CheckMode="v4"/>
+                        <model:MachineViewerIPRule 
+                            CheckMode="v4" 
+                            Tag="IPv4"
+                            TextboxValidatedEventHandler="OnTextboxValidated"
+                            TextboxValidationLostEventHandler="OnTextboxValidationLost"/>
                     </Binding.ValidationRules>
                 </Binding>
             </TextBox.Text>
@@ -124,13 +128,18 @@
                 <Binding Path="IPv6" Mode="TwoWay"
                          UpdateSourceTrigger="PropertyChanged">
                     <Binding.ValidationRules>
-                        <model:MachineViewerIPRule CheckMode="v6"/>
+                        <model:MachineViewerIPRule 
+                            CheckMode="v6"
+                            Tag="IPv6"
+                            TextboxValidatedEventHandler="OnTextboxValidated"
+                            TextboxValidationLostEventHandler="OnTextboxValidationLost"/>
                     </Binding.ValidationRules>
                 </Binding>
             </TextBox.Text>
         </TextBox>
         <TextBlock Grid.Row="5">IPv6</TextBlock>
-        <customcontrols:OSInfoSelector Grid.Column="2" Grid.Row="6" Grid.ColumnSpan="4" Grid.RowSpan="2"/>
+        <customcontrols:OSInfoSelector Grid.Column="2" Grid.Row="6" Grid.ColumnSpan="4" Grid.RowSpan="2"
+                                       PropertyChangedEventHandler="OnOSInfoSelectorPropChanged"/>
         <TextBlock Grid.Row="6">OS Info</TextBlock>
 
         <Grid Margin="6" Height="47"

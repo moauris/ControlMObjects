@@ -6,9 +6,11 @@
              xmlns:local="clr-namespace:ControlM_Manager_GUI.CustomControls"
              mc:Ignorable="d">
     <UserControl.Resources>
-        <Style TargetType="ComboBox">
-            <Setter Property="VerticalContentAlignment" Value="Center"/>
+        <Style x:Key="CbxStyleDefault" TargetType="ComboBox">
+            <Setter Property="VerticalContentAlignment" Value="Top"/>
+            <Setter Property="HorizontalContentAlignment" Value="Center"/>
             <Setter Property="Margin" Value="6"/>
+            <Setter Property="FontSize" Value="18"/>
         </Style>
     </UserControl.Resources>
     <Grid Height="84" Width="528">
@@ -23,18 +25,22 @@
             <RowDefinition Height="1*"/>
         </Grid.RowDefinitions>
         <ComboBox x:Name="cbxOSname" Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="4"
+                  Style="{StaticResource CbxStyleDefault}"
                   SelectedValue="{Binding OSName}">
             <ComboBoxItem Content="Microsoft Windows"/>
             <ComboBoxItem Content="Linux"/>
             <ComboBoxItem Content="AIX"/>
         </ComboBox>
         <ComboBox x:Name="cbxOSversion" Grid.Column="0" Grid.Row="1" Grid.ColumnSpan="3"
-                  SelectedValue="{Binding OSVersion}">
+                  Style="{StaticResource CbxStyleDefault}"
+                  SelectedValue="{Binding OSVersion}"
+                  >
             <ComboBoxItem Content="Server 2012 R2"/>
             <ComboBoxItem Content="10"/>
             <ComboBoxItem Content="7"/>
         </ComboBox>
         <ComboBox x:Name="cbxOSarchitecture" Grid.Column="3" Grid.Row="1"
+                  Style="{StaticResource CbxStyleDefault}"
                   SelectedValue="{Binding OSArchitecture}">
             <ComboBoxItem Content="64 bit"/>
             <ComboBoxItem Content="32 bit"/>

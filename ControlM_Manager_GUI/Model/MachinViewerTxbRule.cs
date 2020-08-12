@@ -55,9 +55,11 @@ namespace ControlM_Manager_GUI.Model
         public IP CheckMode { get; set; }
         public override ValidationResult Validate(object value, CultureInfo cultureInfo)
         {
+            //Setting an empty IPAddress type
             IPAddress TestedIP;
             try
             {
+                //Try parse it, if can be parsed, check if they fit ipv6 or ipv4.
                 TestedIP = IPAddress.Parse((string)value);
                 
                 if (TestedIP.GetAddressBytes().Length != (int)CheckMode)

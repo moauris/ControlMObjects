@@ -17,6 +17,8 @@ using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using System.Diagnostics;
 using ControlM_Manager_GUI.Model;
+using ControlM_Manager_GUI.CustomControls;
+using System.ComponentModel.Design;
 
 namespace ControlM_Manager_GUI.View
 {
@@ -114,11 +116,13 @@ namespace ControlM_Manager_GUI.View
 
         private void OnConfirmClicked(object sender, RoutedEventArgs e)
         {
+            //for future implementations
+            MessageBox.Show("Updating Database (shhh... not really, no..)");
         }
 
         private void OnClearClicked(object sender, RoutedEventArgs e)
         {
-
+            //Reset all contents.
         }
 
         private void OnTextboxValidated(object sender, EventArgs e)
@@ -128,15 +132,21 @@ namespace ControlM_Manager_GUI.View
             {
                 case "Hostname":
                     ValidItems |= ItemValidStatus.Hostname;
-                    OnFormContentValidated(ValidItems);
                     break;
                 case "Domain":
                     ValidItems |= ItemValidStatus.Domain;
-                    OnFormContentValidated(ValidItems);
+                    break;
+                case "IPv4":
+                    ValidItems |= ItemValidStatus.Ipv4;
+                    break;
+                case "IPv6":
+                    ValidItems |= ItemValidStatus.Ipv6;
                     break;
                 default:
                     break;
             }
+
+            OnFormContentValidated(ValidItems);
         }
 
         private void OnTextboxValidationLost(object sender, EventArgs e)
@@ -147,15 +157,38 @@ namespace ControlM_Manager_GUI.View
                 //Only set ValidItem digit to 0 when both are 1.
                 case "Hostname":
                     ValidItems = ~ItemValidStatus.Hostname & ValidItems; 
-                    OnFormContentValidated(ValidItems);
                     break;
                 case "Domain":
                     ValidItems = ~ItemValidStatus.Domain & ValidItems;
-                    OnFormContentValidated(ValidItems);
+                    break;
+                case "IPv4":
+                    ValidItems = ~ItemValidStatus.Ipv4 & ValidItems;
+                    break;
+                case "IPv6":
+                    ValidItems = ~ItemValidStatus.Ipv6 & ValidItems;
                     break;
                 default:
                     break;
             }
+            OnFormContentValidated(ValidItems);
+        }
+
+        private void OnOSInfoSelectorPropChanged(object sender, PropertyChangedEventArgs e)
+        {
+            var osInfoSelector = sender as OSInfoSelector;
+            if((osInfoSelector.OSName != string.Empty) &&
+                (osInfoSelector.OSVersion != string.Empty) &&
+                (osInfoSelector.OSArchitecture != string.Empty))
+            {
+                //All values not empty, make validation
+                ValidItems |= ItemValidStatus.OSInfo;
+            }
+            else
+            {
+                //If not satisfy, make invalid
+                ValidItems = ~ItemValidStatus.OSInfo & ValidItems;
+            }
+            OnFormContentValidated(ValidItems);
         }
     }
 
