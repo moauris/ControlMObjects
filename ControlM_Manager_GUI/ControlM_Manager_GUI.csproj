@@ -102,6 +102,9 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="CustomControls\OSInfoSelector.xaml.cs">
+      <DependentUpon>OSInfoSelector.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Model\EmptyMachine.cs" />
     <Compile Include="Model\MachinViewerTxbRule.cs" />
     <Compile Include="View\MachinePicker.xaml.cs">
@@ -147,6 +150,10 @@
     <Folder Include="ViewModel\" />
   </ItemGroup>
   <ItemGroup>
+    <Page Include="CustomControls\OSInfoSelector.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="View\MachinePicker.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

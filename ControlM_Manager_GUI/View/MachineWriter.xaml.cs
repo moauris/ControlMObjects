@@ -15,6 +15,8 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using System.Diagnostics;
+using ControlM_Manager_GUI.Model;
 
 namespace ControlM_Manager_GUI.View
 {
@@ -26,31 +28,23 @@ namespace ControlM_Manager_GUI.View
         public MachineWriter()
         {
             InitializeComponent();
+            //Binding Events to Raise Validation Events
+            //Init with no items being valid
+            FormContentValidated += ValidateForm;
+
         }
 
-        private void OnValidateClicked(object sender, RoutedEventArgs e)
+        private void ValidateForm(object sender, EventArgs e)
         {
-            try
+            var formValidEventArgs = e as FormContentValidateEventArgs;
+            Debug.Print($"The form validation status is {(int)formValidEventArgs.Item}");
+            if (formValidEventArgs.Item == ItemValidStatus.All)
             {
-                EnteredMachine = new ClientMachine
-                (Hostname, Domain, IPv4, IPv6, new OSInfo("Linux", "7.2", "64-bit"));
+                btnConfirm.IsEnabled = true;
             }
-            catch (Exception exception)
-            {
-                MessageBox.Show(exception.Message);
-                return;
-            }
-            btnUpload.IsEnabled = true;
-
-
         }
 
-        private void OnUploadClicked(object sender, RoutedEventArgs e)
-        {
-            DatabaseWriter.WriteMachineInfo(EnteredMachine);
-
-            btnUpload.IsEnabled = false;
-        }
+        public ItemValidStatus ValidItems { get; set; } = ItemValidStatus.None;
 
         private void OnCancelClicked(object sender, RoutedEventArgs e)
         {
@@ -108,6 +102,76 @@ namespace ControlM_Manager_GUI.View
         public static readonly DependencyProperty IPv6Property =
             DependencyProperty.Register("IPv6", typeof(string), typeof(MachineWriter), new PropertyMetadata(string.Empty));
 
-        
+        /// <summary>
+        /// Fires when the content is validated complete.
+        /// That is, no error on textboxes, OSInfo filled.
+        /// </summary>
+        private event EventHandler FormContentValidated;
+        protected virtual void OnFormContentValidated(ItemValidStatus ValidItem)
+        {
+            FormContentValidated?.Invoke(this, new FormContentValidateEventArgs(ValidItem));
+        }
+
+        private void OnConfirmClicked(object sender, RoutedEventArgs e)
+        {
+        }
+
+        private void OnClearClicked(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void OnTextboxValidated(object sender, EventArgs e)
+        {
+            MachinViewerTxbRule SenderRule = sender as MachinViewerTxbRule;
+            switch (SenderRule.Tag)
+            {
+                case "Hostname":
+                    ValidItems |= ItemValidStatus.Hostname;
+                    OnFormContentValidated(ValidItems);
+                    break;
+                case "Domain":
+                    ValidItems |= ItemValidStatus.Domain;
+                    OnFormContentValidated(ValidItems);
+                    break;
+                default:
+                    break;
+            }
+        }
+
+        private void OnTextboxValidationLost(object sender, EventArgs e)
+        {
+            MachinViewerTxbRule SenderRule = sender as MachinViewerTxbRule;
+            switch (SenderRule.Tag)
+            {
+                //Only set ValidItem digit to 0 when both are 1.
+                case "Hostname":
+                    ValidItems = ~ItemValidStatus.Hostname & ValidItems; 
+                    OnFormContentValidated(ValidItems);
+                    break;
+                case "Domain":
+                    ValidItems = ~ItemValidStatus.Domain & ValidItems;
+                    OnFormContentValidated(ValidItems);
+                    break;
+                default:
+                    break;
+            }
+        }
+    }
+
+    class FormContentValidateEventArgs : EventArgs
+    {
+        public FormContentValidateEventArgs(ItemValidStatus ValidItem)
+        {
+            Item = ValidItem;
+        }
+        public ItemValidStatus Item { get; set; }
+    }
+
+    [Flags]
+    public enum ItemValidStatus
+    {
+        None = 0, Hostname = 1, Domain = 2, Ipv4 = 4, Ipv6 = 8, OSInfo = 16,
+        All = Hostname | Domain | Ipv4 | Ipv6 | OSInfo
     }
 }

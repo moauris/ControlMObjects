@@ -16,6 +16,7 @@ namespace ControlM_Manager_GUI.Model
         /// The Regular Expression for Validation
         /// </summary>
         public string RegexString { get; set; }
+        public string Tag { get; set; }
         public string ErrorMessage { get; set; }
         public override ValidationResult Validate(object value, CultureInfo cultureInfo)
         {
@@ -23,17 +24,28 @@ namespace ControlM_Manager_GUI.Model
             Regex rxValid = new Regex(RegexString);
             if (!rxValid.IsMatch((string)value))
             {
-                
+                TextboxValidationLost();
                 return new ValidationResult(false
                     , ErrorMessage);
             }
-
+            TextboxValidated();
             return ValidationResult.ValidResult;
             
         }
+
+        public event EventHandler TextboxValidatedEventHandler;
+        protected virtual void TextboxValidated()
+        {
+            TextboxValidatedEventHandler?.Invoke(this, EventArgs.Empty);
+        }
+        public event EventHandler TextboxValidationLostEventHandler;
+        protected virtual void TextboxValidationLost()
+        {
+            TextboxValidationLostEventHandler?.Invoke(this, EventArgs.Empty);
+        }
     }
 
-    class MachineViewerIPRule : ValidationRule
+    class MachineViewerIPRule : MachinViewerTxbRule
     {
         public enum IP
         {
@@ -50,14 +62,17 @@ namespace ControlM_Manager_GUI.Model
                 
                 if (TestedIP.GetAddressBytes().Length != (int)CheckMode)
                 {
+                    TextboxValidationLost();
                     return new ValidationResult(false
                         , $"Not an IP{CheckMode} Address");
                 }
             }
             catch (Exception e)
             {
+                TextboxValidationLost();
                 return new ValidationResult(false, e.Message);
             }
+            TextboxValidated();
             return ValidationResult.ValidResult;
         }
     }
