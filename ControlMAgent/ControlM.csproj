@@ -6,6 +6,7 @@
     <FileVersion>0.0.0.1</FileVersion>
     <PackageReleaseNotes>Beta test version 0.0.0.1</PackageReleaseNotes>
     <Version>0.0.0.1</Version>
+    <Platforms>AnyCPU;x86;x64</Platforms>
   </PropertyGroup>
 
   <ItemGroup>

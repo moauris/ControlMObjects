@@ -4,6 +4,7 @@
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:ControlM_Manager_GUI.View"
+      xmlns:model="clr-namespace:ControlM_Manager_GUI.Model"
       mc:Ignorable="d"
       SizeToContent="WidthAndHeight"
       Title="MachineViewer" FontSize="22" WindowStyle="None"
@@ -15,7 +16,7 @@
         <Style x:Name="ColDefs" TargetType="ColumnDefinition">
             <Setter Property="Width" Value="132"/>
         </Style>
-        <Style x:Name="MonoFont" TargetType="TextBox">
+        <Style x:Key="MonoFontTxb" TargetType="TextBox">
             <Setter Property="FontFamily" Value="Cascadia Code"/>
             <Setter Property="FontSize" Value="22"/>
             <Setter Property="Grid.ColumnSpan" Value="4"/>
@@ -58,15 +59,15 @@
                HorizontalAlignment="Center" FontSize="37" FontWeight="DemiBold">
                 Machine Infomation
             </Label>
-        <TextBox Grid.Row="2" Text="{Binding Hostname,Mode=TwoWay}"/>
+        <TextBox Grid.Row="2" Style="{StaticResource MonoFontTxb}" Text="{Binding Hostname,Mode=TwoWay}"/>
         <TextBlock Grid.Row="2">Host Name</TextBlock>
-        <TextBox Grid.Row="3" Text="{Binding Domain,Mode=TwoWay}"/>
+        <TextBox Grid.Row="3" Style="{StaticResource MonoFontTxb}" Text="{Binding Domain,Mode=TwoWay}"/>
         <TextBlock Grid.Row="3">Domain</TextBlock>
-        <TextBox Grid.Row="4" Text="{Binding IPv4,Mode=OneWay}" IsEnabled="False"/>
+        <TextBox Grid.Row="4" Style="{StaticResource MonoFontTxb}" Text="{Binding IPv4,Mode=OneWay}" IsEnabled="False"/>
         <TextBlock Grid.Row="4">IPv4</TextBlock>
-        <TextBox Grid.Row="5" Text="{Binding IPv6,Mode=OneWay}" IsEnabled="False"/>
+        <TextBox Grid.Row="5" Style="{StaticResource MonoFontTxb}" Text="{Binding IPv6,Mode=OneWay}" IsEnabled="False"/>
         <TextBlock Grid.Row="5">IPv6</TextBlock>
-        <TextBox Grid.Row="6" Text="{Binding OSInformation,Mode=OneWay}" IsEnabled="False"/>
+        <TextBox Grid.Row="6" Style="{StaticResource MonoFontTxb}" Text="{Binding OSInformation,Mode=OneWay}" IsEnabled="False"/>
         <TextBlock Grid.Row="6">OS Info</TextBlock>
         
         <Grid Margin="6" Height="47"
