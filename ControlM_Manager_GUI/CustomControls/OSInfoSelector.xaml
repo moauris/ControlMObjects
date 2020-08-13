@@ -25,23 +25,19 @@
             <RowDefinition Height="1*"/>
         </Grid.RowDefinitions>
         <ComboBox x:Name="cbxOSname" Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="4"
-                  Style="{StaticResource CbxStyleDefault}"
-                  SelectedValue="{Binding OSName}">
+                  Style="{StaticResource CbxStyleDefault}">
             <ComboBoxItem Content="Microsoft Windows"/>
             <ComboBoxItem Content="Linux"/>
             <ComboBoxItem Content="AIX"/>
         </ComboBox>
         <ComboBox x:Name="cbxOSversion" Grid.Column="0" Grid.Row="1" Grid.ColumnSpan="3"
-                  Style="{StaticResource CbxStyleDefault}"
-                  SelectedValue="{Binding OSVersion}"
-                  >
+                  Style="{StaticResource CbxStyleDefault}">
             <ComboBoxItem Content="Server 2012 R2"/>
             <ComboBoxItem Content="10"/>
             <ComboBoxItem Content="7"/>
         </ComboBox>
         <ComboBox x:Name="cbxOSarchitecture" Grid.Column="3" Grid.Row="1"
-                  Style="{StaticResource CbxStyleDefault}"
-                  SelectedValue="{Binding OSArchitecture}">
+                  Style="{StaticResource CbxStyleDefault}">
             <ComboBoxItem Content="64 bit"/>
             <ComboBoxItem Content="32 bit"/>
         </ComboBox>

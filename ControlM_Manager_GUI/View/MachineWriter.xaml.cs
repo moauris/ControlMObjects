@@ -33,13 +33,17 @@ namespace ControlM_Manager_GUI.View
             //Binding Events to Raise Validation Events
             //Init with no items being valid
             FormContentValidated += ValidateForm;
-
+            osSelector.cbxOSname.SelectionChanged += OnSelectorSelectChanged;
+            osSelector.cbxOSversion.SelectionChanged += OnSelectorSelectChanged;
+            osSelector.cbxOSarchitecture.SelectionChanged += OnSelectorSelectChanged;
         }
+
+        
 
         private void ValidateForm(object sender, EventArgs e)
         {
             var formValidEventArgs = e as FormContentValidateEventArgs;
-            Debug.Print($"The form validation status is {(int)formValidEventArgs.Item}");
+            Debug.Print($"The form validation status is {(int)formValidEventArgs.Item}/{(int)ItemValidStatus.All}");
             if (formValidEventArgs.Item == ItemValidStatus.All)
             {
                 btnConfirm.IsEnabled = true;
@@ -172,21 +176,33 @@ namespace ControlM_Manager_GUI.View
             }
             OnFormContentValidated(ValidItems);
         }
-
-        private void OnOSInfoSelectorPropChanged(object sender, PropertyChangedEventArgs e)
+        private void OnSelectorSelectChanged(object sender, SelectionChangedEventArgs e)
         {
-            var osInfoSelector = sender as OSInfoSelector;
-            if((osInfoSelector.OSName != string.Empty) &&
-                (osInfoSelector.OSVersion != string.Empty) &&
-                (osInfoSelector.OSArchitecture != string.Empty))
+
+            //Debug.Print($"Event Fired: Selector Changed from {e.RemovedItems.Count} => {e.AddedItems.Count}");
+            //Selector event works normally, not apply validation rules:
+            // Each time this has been invoked, check the value of the three boxes to not be zero
+            var SenderAsCbx = sender as ComboBox;
+            //Debug.Print(SenderAsCbx.Name);
+            //cbxOSname
+            //cbxOSversion
+            //cbxOSarchitecture
+            string selectedvalue = e.AddedItems[0].ToString();
+            Debug.Print($"Combobox {SenderAsCbx.Name} value changed to {selectedvalue}");
+            switch (SenderAsCbx.Name)
             {
-                //All values not empty, make validation
-                ValidItems |= ItemValidStatus.OSInfo;
-            }
-            else
-            {
-                //If not satisfy, make invalid
-                ValidItems = ~ItemValidStatus.OSInfo & ValidItems;
+                case "cbxOSname":
+                    ValidItems |= ItemValidStatus.OSName;
+                    break;
+                case "cbxOSversion":
+                    ValidItems |= ItemValidStatus.OSVersion;
+                    break;
+                case "cbxOSarchitecture":
+                    ValidItems |= ItemValidStatus.OSArchitecture;
+                    break;
+                default:
+                    Debug.Print($"No case selected {SenderAsCbx.Name}");
+                    break;
             }
             OnFormContentValidated(ValidItems);
         }
@@ -204,7 +220,8 @@ namespace ControlM_Manager_GUI.View
     [Flags]
     public enum ItemValidStatus
     {
-        None = 0, Hostname = 1, Domain = 2, Ipv4 = 4, Ipv6 = 8, OSInfo = 16,
-        All = Hostname | Domain | Ipv4 | Ipv6 | OSInfo
+        None = 0, Hostname = 1, Domain = 2, Ipv4 = 4, Ipv6 = 8, OSName = 16,
+        OSVersion = 32, OSArchitecture = 64,
+        All = Hostname | Domain | Ipv4 | Ipv6 | OSName | OSVersion | OSArchitecture
     }
 }
