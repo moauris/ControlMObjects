@@ -5,11 +5,10 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Data.OleDb;
 
-namespace CtlmDBDriver_Access
+namespace accessdb_driver
 {
-    public class DatabaseReader
+    class DatabaseConnector
     {
-        
-        
+
     }
 }

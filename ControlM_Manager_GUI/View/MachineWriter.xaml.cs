@@ -37,9 +37,6 @@ namespace ControlM_Manager_GUI.View
             osSelector.cbxOSversion.SelectionChanged += OnSelectorSelectChanged;
             osSelector.cbxOSarchitecture.SelectionChanged += OnSelectorSelectChanged;
         }
-
-        
-
         private void ValidateForm(object sender, EventArgs e)
         {
             var formValidEventArgs = e as FormContentValidateEventArgs;

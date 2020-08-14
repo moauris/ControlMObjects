@@ -1,4 +1,5 @@
 ﻿<UserControl x:Class="ControlM_Manager_GUI.CustomControls.OSInfoSelector"
+             x:Name="selector"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
@@ -6,14 +7,16 @@
              xmlns:local="clr-namespace:ControlM_Manager_GUI.CustomControls"
              mc:Ignorable="d">
     <UserControl.Resources>
+        <local:OSNameList x:Key="osnamelist"/>
         <Style x:Key="CbxStyleDefault" TargetType="ComboBox">
             <Setter Property="VerticalContentAlignment" Value="Top"/>
             <Setter Property="HorizontalContentAlignment" Value="Center"/>
             <Setter Property="Margin" Value="6"/>
-            <Setter Property="FontSize" Value="18"/>
+            <Setter Property="IsSynchronizedWithCurrentItem" Value="True" />
+            <!--Setter Property="FontSize" Value="5"/-->
         </Style>
     </UserControl.Resources>
-    <Grid Height="84" Width="528">
+    <Grid Height="84" Width="528" DataContext="{Binding Source={StaticResource osnamelist}}">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="1*"/>
             <ColumnDefinition Width="1*"/>
@@ -25,21 +28,25 @@
             <RowDefinition Height="1*"/>
         </Grid.RowDefinitions>
         <ComboBox x:Name="cbxOSname" Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="4"
-                  Style="{StaticResource CbxStyleDefault}">
-            <ComboBoxItem Content="Microsoft Windows"/>
-            <ComboBoxItem Content="Linux"/>
-            <ComboBoxItem Content="AIX"/>
+                  Style="{StaticResource CbxStyleDefault}" 
+                  ItemsSource="{Binding}">
+            <ComboBox.ItemTemplate>
+                <DataTemplate>
+                    <TextBlock Text="{Binding}" FontSize="18"/>
+                </DataTemplate>
+            </ComboBox.ItemTemplate>
         </ComboBox>
         <ComboBox x:Name="cbxOSversion" Grid.Column="0" Grid.Row="1" Grid.ColumnSpan="3"
-                  Style="{StaticResource CbxStyleDefault}">
-            <ComboBoxItem Content="Server 2012 R2"/>
-            <ComboBoxItem Content="10"/>
-            <ComboBoxItem Content="7"/>
+                  Style="{StaticResource CbxStyleDefault}"
+                  ItemsSource="{Binding Path=osVersionList}">
+            <ComboBox.ItemTemplate>
+                <DataTemplate>
+                    <TextBlock Text="{Binding}" FontSize="18"/>
+                </DataTemplate>
+            </ComboBox.ItemTemplate>
         </ComboBox>
         <ComboBox x:Name="cbxOSarchitecture" Grid.Column="3" Grid.Row="1"
                   Style="{StaticResource CbxStyleDefault}">
-            <ComboBoxItem Content="64 bit"/>
-            <ComboBoxItem Content="32 bit"/>
         </ComboBox>
     </Grid>
 </UserControl>
