@@ -46,7 +46,13 @@
             </ComboBox.ItemTemplate>
         </ComboBox>
         <ComboBox x:Name="cbxOSarchitecture" Grid.Column="3" Grid.Row="1"
-                  Style="{StaticResource CbxStyleDefault}">
+                  Style="{StaticResource CbxStyleDefault}"
+                  ItemsSource="{Binding Path=osVersionList/osArchitectureList}">
+            <ComboBox.ItemTemplate>
+                <DataTemplate>
+                    <TextBlock Text="{Binding}" FontSize="18"/>
+                </DataTemplate>
+            </ComboBox.ItemTemplate>
         </ComboBox>
     </Grid>
 </UserControl>

@@ -80,20 +80,10 @@ namespace ControlM_Manager_GUI.CustomControls
                         string osversion = row1.ItemArray[0].ToString();
                         Debug.Print($"Addeding OSVersion: {osversion}");
                         OSVersionDetail d = new OSVersionDetail(osversion);
+                        d.osArchitectureList.Add(new OSArchitecture("32 bit"));
+                        d.osArchitectureList.Add(new OSArchitecture("64 bit"));
 
-                        strSQL = @"SELECT DISTINCT [os_architecture] FROM [tbl_osinfo] WHERE os_name = @os_name AND os_version = @os_version;";
-                        select_cmd = new OleDbCommand(strSQL, conn);
-                        select_cmd.Parameters.Add("@os_name", OleDbType.VarChar);
-                        select_cmd.Parameters.Add("@os_version", OleDbType.VarChar);
-                        select_cmd.Parameters["@os_name"].Value = osname;
-                        select_cmd.Parameters["@os_version"].Value = osversion;
-                        DataSet dataset2 = new DataSet();
-                        OleDbDataAdapter adapter2 = new OleDbDataAdapter(select_cmd);
-                        d.osArchitectureList = new OSArchitectureList();
-                        foreach (DataRow row2 in dataset2.Tables[0].Rows)
-                        {
-                            d.osArchitectureList.Add(new OSArchitecture(row2.ItemArray[0].ToString()));
-                        }
+
                         v.Add(d);
                     }
                     n.osVersionList = v;
