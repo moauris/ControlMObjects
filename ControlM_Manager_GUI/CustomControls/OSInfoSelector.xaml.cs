@@ -24,5 +24,16 @@ namespace ControlM_Manager_GUI.CustomControls
         {
             InitializeComponent();
         }
+
+        public OSNameList osNameList
+        {
+            get { return (OSNameList)GetValue(osNameListProperty); }
+            set { SetValue(osNameListProperty, value); }
+        }
+
+        // Using a DependencyProperty as the backing store for osNameList.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty osNameListProperty =
+            DependencyProperty.Register("osNameList", typeof(OSNameList), typeof(OSInfoSelector), new PropertyMetadata(new OSNameList()));
     }
+
 }

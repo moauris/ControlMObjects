@@ -84,6 +84,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DatabaseConnector.cs" />
     <Compile Include="DatabaseReader.cs" />
     <Compile Include="DatabaseWriter.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

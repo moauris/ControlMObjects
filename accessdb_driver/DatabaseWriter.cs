@@ -16,7 +16,7 @@ namespace CtlmDBDriver_Access
         public static void WriteMachineInfo(ClientMachine clientMachine)
         {
             
-            string conn_str = @"Provider=Microsoft.ACE.OLEDB.12.0;Data Source=C:\Users\MoChen\source\repos\ControlMAgent\accessdb_driver\Assets\cmmgui_schema.accdb;Persist Security Info=True";
+            string conn_str = @"Provider=Microsoft.ACE.OLEDB.12.0;Data Source=C:\Users\40137\source\repos\ControlMObjects\accessdb_driver\Assets\cmmgui_schema.accdb;Persist Security Info=True";
 
             Debug.Print(conn_str);
             using (OleDbConnection conn = new OleDbConnection(conn_str))

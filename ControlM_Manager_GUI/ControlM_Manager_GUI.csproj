@@ -107,6 +107,7 @@
     </Compile>
     <Compile Include="Model\EmptyMachine.cs" />
     <Compile Include="Model\MachinViewerTxbRule.cs" />
+    <Compile Include="CustomControls\OSMasterDetails.cs" />
     <Compile Include="View\MachinePicker.xaml.cs">
       <DependentUpon>MachinePicker.xaml</DependentUpon>
     </Compile>
