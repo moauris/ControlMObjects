@@ -6,7 +6,12 @@
         xmlns:local="clr-namespace:ControlM_Manager_GUI.View"
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
-    <Grid>
-        
-    </Grid>
+    <StackPanel>
+        <Button Click="NodeViewerViewClicked">
+            NodeViewer: Mode = View
+        </Button>
+        <Button Click="NodeViewerWriteClicked">
+            NodeViewer: Mode = Write
+        </Button>
+    </StackPanel>
 </Window>

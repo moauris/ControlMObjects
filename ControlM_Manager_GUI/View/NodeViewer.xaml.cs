@@ -1,5 +1,4 @@
-﻿using ControlM;
-using CtlmDBDriver_Access;
+﻿using CtlmDBDriver_Access;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -19,15 +18,19 @@ using System.Diagnostics;
 using ControlM_Manager_GUI.Model;
 using ControlM_Manager_GUI.CustomControls;
 using System.ComponentModel.Design;
+using System.Security.Cryptography.X509Certificates;
+using ControlM_Manager_GUI.ControlMModels;
 
 namespace ControlM_Manager_GUI.View
 {
     /// <summary>
     /// Interaction logic for MachineWriter.xaml
     /// </summary>
-    public partial class MachineWriter : Window
+    ///
+    public partial class NodeViewer : Window
     {
-        public MachineWriter()
+        
+        public NodeViewer()
         {
             InitializeComponent();
             //Binding Events to Raise Validation Events
@@ -36,6 +39,13 @@ namespace ControlM_Manager_GUI.View
             osSelector.cbxOSname.SelectionChanged += OnSelectorSelectChanged;
             osSelector.cbxOSversion.SelectionChanged += OnSelectorSelectChanged;
             osSelector.cbxOSarchitecture.SelectionChanged += OnSelectorSelectChanged;
+        }
+
+        public NodeViewer(ClientNode clientNode)
+        {
+            Debug.Print("Creating a Node Viewer Instance with display mode.");
+            DisplayedNode = clientNode;
+            InitializeComponent();
         }
         private void ValidateForm(object sender, EventArgs e)
         {
@@ -59,7 +69,8 @@ namespace ControlM_Manager_GUI.View
             this.DragMove();
         }
 
-        public ClientMachine EnteredMachine { get; set; }
+        public ClientNode EnteredNode { get; set; }
+        public ClientNode DisplayedNode { get; set; }
 
         public string Hostname
         {
@@ -69,7 +80,7 @@ namespace ControlM_Manager_GUI.View
 
         // Using a DependencyProperty as the backing store for Hostname.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty HostnameProperty =
-            DependencyProperty.Register("Hostname", typeof(string), typeof(MachineWriter), new PropertyMetadata(string.Empty));
+            DependencyProperty.Register("Hostname", typeof(string), typeof(NodeViewer), new PropertyMetadata(string.Empty));
 
 
 
@@ -81,9 +92,7 @@ namespace ControlM_Manager_GUI.View
 
         // Using a DependencyProperty as the backing store for Domain.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty DomainProperty =
-            DependencyProperty.Register("Domain", typeof(string), typeof(MachineWriter), new PropertyMetadata(string.Empty));
-
-
+            DependencyProperty.Register("Domain", typeof(string), typeof(NodeViewer), new PropertyMetadata(string.Empty));
 
         public string IPv4
         {
@@ -93,7 +102,7 @@ namespace ControlM_Manager_GUI.View
 
         // Using a DependencyProperty as the backing store for IPv4.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty IPv4Property =
-            DependencyProperty.Register("IPv4", typeof(string), typeof(MachineWriter), new PropertyMetadata(string.Empty));
+            DependencyProperty.Register("IPv4", typeof(string), typeof(NodeViewer), new PropertyMetadata(string.Empty));
 
         public string IPv6
         {
@@ -103,7 +112,7 @@ namespace ControlM_Manager_GUI.View
 
         // Using a DependencyProperty as the backing store for IPv4.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty IPv6Property =
-            DependencyProperty.Register("IPv6", typeof(string), typeof(MachineWriter), new PropertyMetadata(string.Empty));
+            DependencyProperty.Register("IPv6", typeof(string), typeof(NodeViewer), new PropertyMetadata(string.Empty));
 
         /// <summary>
         /// Fires when the content is validated complete.
@@ -172,6 +181,11 @@ namespace ControlM_Manager_GUI.View
                     break;
             }
             OnFormContentValidated(ValidItems);
+        }
+        public enum DisplayMode
+        {
+            View,
+            Write
         }
         private void OnSelectorSelectChanged(object sender, SelectionChangedEventArgs e)
         {

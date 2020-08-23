@@ -4,6 +4,7 @@ using System.Text;
 
 namespace ControlM
 {
+    
     public sealed class Agent : Components
     {
         public Agent(ControlMVersion version, ClientNode node, Server connectedMServer, int msmaPort) : base(version, node)

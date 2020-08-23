@@ -51,7 +51,7 @@ namespace ControlM_Manager_GUI.CustomControls
         /// </summary>
         public OSNameList()
         {
-            string conn_str = @"Provider=Microsoft.ACE.OLEDB.12.0;Data Source=C:\Users\40137\source\repos\ControlMObjects\accessdb_driver\Assets\cmmgui_schema.accdb;Persist Security Info=True";
+            string conn_str = @"Provider=Microsoft.ACE.OLEDB.12.0;Data Source=C:\Users\40137\source\repos\ControlMManager\accessdb_driver\Assets\cmmgui_schema.accdb;Persist Security Info=True";
 
             using (OleDbConnection conn = new OleDbConnection(conn_str))
             {
