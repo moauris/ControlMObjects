@@ -19,7 +19,7 @@ namespace ControlM_Manager_GUI.ControlMModels
             get { return hostEntries; }
             set 
             {
-                if (HostEntries.Count > 3)
+                if (value.Count > 3)
                 {
                     throw new Exception("Node Cluster cannot hold more than 3 Nodes.");
                 }
@@ -38,11 +38,12 @@ namespace ControlM_Manager_GUI.ControlMModels
 
         public static ClientNode CreateSample()
         {
-            return new ClientNode
+            ClientNode samplenode = new ClientNode
             {
-                HostEntries = { new HostEntry("uiirrii21", ".chenmo.com.cn", "192.100.38.4", "6fd0:38d7:eb64:c34b:9466:20d8:1fc4:e9f6") },
+                HostEntries = new ObservableCollection<HostEntry> { new HostEntry("uiirrii21", ".chenmo.com.cn", "192.100.38.4", "6fd0:38d7:eb64:c34b:9466:20d8:1fc4:e9f6") },
                 OSInformation = new OSInfo("Microsoft Windows", "10", "64 bit")
             };
+            return samplenode;
         }
 
     }

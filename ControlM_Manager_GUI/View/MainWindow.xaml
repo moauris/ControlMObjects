@@ -7,10 +7,10 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
     <StackPanel>
-        <Button Click="NodeViewerViewClicked">
+        <Button Width="180" Margin="10" Click="NodeViewerViewClicked">
             NodeViewer: Mode = View
         </Button>
-        <Button Click="NodeViewerWriteClicked">
+        <Button Width="180" Margin="10" Click="NodeViewerWriteClicked">
             NodeViewer: Mode = Write
         </Button>
     </StackPanel>
