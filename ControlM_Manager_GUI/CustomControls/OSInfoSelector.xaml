@@ -11,12 +11,12 @@
         <Style x:Key="CbxStyleDefault" TargetType="ComboBox">
             <Setter Property="VerticalContentAlignment" Value="Top"/>
             <Setter Property="HorizontalContentAlignment" Value="Center"/>
-            <Setter Property="Margin" Value="6"/>
+            <Setter Property="Margin" Value="8 4"/>
             <Setter Property="IsSynchronizedWithCurrentItem" Value="True" />
             <!--Setter Property="FontSize" Value="5"/-->
         </Style>
     </UserControl.Resources>
-    <Grid Height="84" Width="528" DataContext="{Binding Source={StaticResource osnamelist}}">
+    <Grid Height="60" Width="528" DataContext="{Binding Source={StaticResource osnamelist}}">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="1*"/>
             <ColumnDefinition Width="1*"/>
@@ -32,7 +32,7 @@
                   ItemsSource="{Binding}" SelectedValue="">
             <ComboBox.ItemTemplate>
                 <DataTemplate>
-                    <TextBlock Text="{Binding}" FontSize="18"/>
+                    <TextBlock Text="{Binding}"/>
                 </DataTemplate>
             </ComboBox.ItemTemplate>
         </ComboBox>
@@ -41,7 +41,7 @@
                   ItemsSource="{Binding Path=osVersionList}">
             <ComboBox.ItemTemplate>
                 <DataTemplate>
-                    <TextBlock Text="{Binding}" FontSize="18"/>
+                    <TextBlock Text="{Binding}"/>
                 </DataTemplate>
             </ComboBox.ItemTemplate>
         </ComboBox>
@@ -50,7 +50,7 @@
                   ItemsSource="{Binding Path=osVersionList/osArchitectureList}">
             <ComboBox.ItemTemplate>
                 <DataTemplate>
-                    <TextBlock Text="{Binding}" FontSize="18"/>
+                    <TextBlock Text="{Binding}"/>
                 </DataTemplate>
             </ComboBox.ItemTemplate>
         </ComboBox>

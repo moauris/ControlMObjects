@@ -1,0 +1,60 @@
+﻿<UserControl x:Class="ControlM_Manager_GUI.CustomControls.HostEntryInputBoxGroup"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:ControlM_Manager_GUI.CustomControls"
+             mc:Ignorable="d" 
+             d:DesignHeight="120" d:DesignWidth="560">
+    <Grid Width="560" Height="120">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="1*"/>
+            <ColumnDefinition Width="1*"/>
+            <ColumnDefinition Width="1*"/>
+            <ColumnDefinition Width="1*"/>
+            <ColumnDefinition Width="1*"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="1*"/>
+        </Grid.RowDefinitions>
+        <TextBlock Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2"
+                   HorizontalAlignment="Center" VerticalAlignment="Center">
+            Host Name
+        </TextBlock>
+        <TextBlock Grid.Row="0" Grid.Column="2" Grid.ColumnSpan="3"
+                   HorizontalAlignment="Center" VerticalAlignment="Center">
+            Domain
+        </TextBlock>
+        <TextBox Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2"
+                 Margin="8 4"
+                 HorizontalContentAlignment="Center" VerticalContentAlignment="Center">
+            &lt;Enter hostname here&gt;
+        </TextBox>
+        <TextBox Grid.Row="1" Grid.Column="2" Grid.ColumnSpan="3"
+                 Margin="8 4"
+                 HorizontalContentAlignment="Center" VerticalContentAlignment="Center">
+            &lt;Enter Domain here&gt;
+        </TextBox>
+        <TextBlock Grid.Row="2" Grid.Column="0"
+                   HorizontalAlignment="Center" VerticalAlignment="Center">
+            IPv4 Address:
+        </TextBlock>
+        <TextBox Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="4"
+                 Margin="8 4"
+                 HorizontalContentAlignment="Center" VerticalContentAlignment="Center">
+            &lt;Enter IPv4 Address here&gt;
+        </TextBox>
+        <TextBlock Grid.Row="3" Grid.Column="0"
+                   HorizontalAlignment="Center" VerticalAlignment="Center">
+            IPv6 Address:
+        </TextBlock>
+        <TextBox Grid.Row="3" Grid.Column="1" Grid.ColumnSpan="4"
+                 Margin="8 4"
+                 HorizontalContentAlignment="Center" VerticalContentAlignment="Center">
+            &lt;Enter IPv6 Address here&gt;
+        </TextBox>
+    </Grid>
+</UserControl>

@@ -10,27 +10,19 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
+using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace ControlM_Manager_GUI.View
+namespace ControlM_Manager_GUI.CustomControls
 {
     /// <summary>
-    /// Interaction logic for NodeViewer.xaml
+    /// Interaction logic for HostEntryInputBoxGroup.xaml
     /// </summary>
-    public partial class NodeViewer : Window
+    public partial class HostEntryInputBoxGroup : UserControl
     {
-        public NodeViewer()
+        public HostEntryInputBoxGroup()
         {
             InitializeComponent();
-        }
-
-        private void ButtonPrintClicked(object sender, RoutedEventArgs e)
-        {
-            PrintDialog printDialog = new PrintDialog();
-            if (printDialog.ShowDialog() == true)
-            {
-                printDialog.PrintVisual(this, "Printing Node Viewer");
-            }
         }
     }
 }

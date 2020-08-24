@@ -106,6 +106,9 @@
     <Compile Include="ControlMModels\ClientNode.cs" />
     <Compile Include="ControlMModels\Components.cs" />
     <Compile Include="ControlMModels\Server.cs" />
+    <Compile Include="CustomControls\HostEntryInputBoxGroup.xaml.cs">
+      <DependentUpon>HostEntryInputBoxGroup.xaml</DependentUpon>
+    </Compile>
     <Compile Include="CustomControls\OSInfoSelector.xaml.cs">
       <DependentUpon>OSInfoSelector.xaml</DependentUpon>
     </Compile>
@@ -148,6 +151,10 @@
     <Folder Include="ViewModel\" />
   </ItemGroup>
   <ItemGroup>
+    <Page Include="CustomControls\HostEntryInputBoxGroup.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="CustomControls\OSInfoSelector.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

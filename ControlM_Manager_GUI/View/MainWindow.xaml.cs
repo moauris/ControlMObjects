@@ -29,7 +29,8 @@ namespace ControlM_Manager_GUI.View
         private void NodeViewerViewClicked(object sender, RoutedEventArgs e)
         {
             Debug.Print("Button Clicked, display NodeViewer");
-            var nodeViewer = new NodeViewer(ClientNode.CreateSample());
+            //var nodeViewer = new NodeViewer(ClientNode.CreateSample());
+            var nodeViewer = new NodeViewer();
             nodeViewer.Show();
         }
 
