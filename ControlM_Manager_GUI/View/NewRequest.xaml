@@ -1,0 +1,74 @@
+﻿<Window x:Class="ControlM_Manager_GUI.View.NewRequest"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:ControlM_Manager_GUI.View"
+        mc:Ignorable="d"
+        Title="New M/Agent Request" Height="5.585 in" Width="8.3 in">
+    <StackPanel Orientation="Vertical">
+        <Border BorderBrush="BurlyWood" BorderThickness="1" Margin="4">
+            <Grid Margin="4">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="1*"/>
+                    <ColumnDefinition Width="1*"/>
+                </Grid.ColumnDefinitions>
+                <StackPanel Orientation="Vertical" Grid.Column="0">
+                    <HeaderedContentControl Header="Incident Number">
+                        <TextBox/>
+                    </HeaderedContentControl>
+                    <HeaderedContentControl Header="Requester">
+                        <TextBox/>
+                    </HeaderedContentControl>
+                    <HeaderedContentControl Header="Date Requested">
+                        <TextBox/>
+                    </HeaderedContentControl>
+                    <HeaderedContentControl Header="Contact Infomation">
+                        <TextBox/>
+                    </HeaderedContentControl>
+                    <HeaderedContentControl Header="Approver">
+                        <TextBox/>
+                    </HeaderedContentControl>
+                </StackPanel>
+            </Grid>
+        </Border>
+        <Border BorderBrush="BurlyWood" BorderThickness="1" Margin="4">
+            <HeaderedContentControl Header="M/Agent No.1">
+                <StackPanel Orientation="Vertical">
+                    <HeaderedContentControl Header="Request Type:">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="1*"/>
+                                <ColumnDefinition Width="1*"/>
+                                <ColumnDefinition Width="1*"/>
+                            </Grid.ColumnDefinitions>
+                            <RadioButton GroupName="rbnGroupRequestType"
+                                     Content="Register" Grid.Column="0"/>
+                            <RadioButton GroupName="rbnGroupRequestType"
+                                     Content="Change" Grid.Column="1"/>
+                            <RadioButton GroupName="rbnGroupRequestType"
+                                     Content="Delete" Grid.Column="2"/>
+                        </Grid>
+                        
+                    </HeaderedContentControl>
+                    <HeaderedContentControl Header="Change Type:">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="1*"/>
+                                <ColumnDefinition Width="1*"/>
+                                <ColumnDefinition Width="1*"/>
+                            </Grid.ColumnDefinitions>
+                            <RadioButton GroupName="rbnGroupRequestType"
+                                     Content="Register" Grid.Column="0"/>
+                            <RadioButton GroupName="rbnGroupRequestType"
+                                     Content="Change" Grid.Column="1"/>
+                            <RadioButton GroupName="rbnGroupRequestType"
+                                     Content="Delete" Grid.Column="2"/>
+                        </Grid>
+                        
+                    </HeaderedContentControl>
+                </StackPanel>
+            </HeaderedContentControl>
+        </Border>
+    </StackPanel>
+</Window>

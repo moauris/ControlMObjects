@@ -1,5 +1,7 @@
-﻿using System;
+﻿using ControlM_Manager_GUI.ControlMModels;
+using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -22,6 +24,20 @@ namespace ControlM_Manager_GUI.View
         public MainWindow()
         {
             InitializeComponent();
+        }
+
+        private void NodeViewerViewClicked(object sender, RoutedEventArgs e)
+        {
+            Debug.Print("Button Clicked, display NodeViewer");
+            //var nodeViewer = new NodeViewer(ClientNode.CreateSample());
+            var nodeViewer = new NodeViewer();
+            nodeViewer.Show();
+        }
+
+        private void NodeViewerWriteClicked(object sender, RoutedEventArgs e)
+        {
+            var nodeViewer = new NodeViewer();
+            nodeViewer.Show();
         }
     }
 }

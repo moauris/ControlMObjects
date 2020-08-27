@@ -12,6 +12,8 @@ namespace ControlM
     /// 2. Control-M Server
     /// 3. Control-M Agent
     /// </summary>
+
+    [Serializable]
     public abstract class Components
     {
         public Components(ControlMVersion version, ClientNode node)
@@ -108,7 +110,7 @@ namespace ControlM
         public override bool IsCluster() => true;
 
     }
-
+    [Serializable]
     public class ClientMachine
     {
         
@@ -229,11 +231,11 @@ namespace ControlM
     }
     public class ControlMVersion
     {
-        public static ControlMVersion ctlmVer7000fp5()
+        public static ControlMVersion V7000()
         {
             return new ControlMVersion(7,0,0,"FixPack5");
         }
-        public static ControlMVersion ctlmVer9018()
+        public static ControlMVersion V9018()
         {
             return new ControlMVersion(9,0,18,"-");
         }

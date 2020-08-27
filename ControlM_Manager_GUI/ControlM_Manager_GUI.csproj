@@ -102,23 +102,26 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="ControlMModels\Agent.cs" />
+    <Compile Include="ControlMModels\ClientNode.cs" />
+    <Compile Include="ControlMModels\Components.cs" />
+    <Compile Include="ControlMModels\Server.cs" />
+    <Compile Include="CustomControls\HostEntryInputBoxGroup.xaml.cs">
+      <DependentUpon>HostEntryInputBoxGroup.xaml</DependentUpon>
+    </Compile>
     <Compile Include="CustomControls\OSInfoSelector.xaml.cs">
       <DependentUpon>OSInfoSelector.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Model\EmptyMachine.cs" />
     <Compile Include="Model\MachinViewerTxbRule.cs" />
     <Compile Include="CustomControls\OSMasterDetails.cs" />
-    <Compile Include="View\MachinePicker.xaml.cs">
-      <DependentUpon>MachinePicker.xaml</DependentUpon>
+    <Compile Include="View\MainWindow.xaml.cs">
+      <DependentUpon>MainWindow.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\MachinePickerTestWindow.xaml.cs">
-      <DependentUpon>MachinePickerTestWindow.xaml</DependentUpon>
+    <Compile Include="View\NewRequest.xaml.cs">
+      <DependentUpon>NewRequest.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\MachineViewer.xaml.cs">
-      <DependentUpon>MachineViewer.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="View\MachineWriter.xaml.cs">
-      <DependentUpon>MachineWriter.xaml</DependentUpon>
+    <Compile Include="View\NodeViewer.xaml.cs">
+      <DependentUpon>NodeViewer.xaml</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>
@@ -151,32 +154,31 @@
     <Folder Include="ViewModel\" />
   </ItemGroup>
   <ItemGroup>
+    <Page Include="CustomControls\HostEntryInputBoxGroup.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="CustomControls\OSInfoSelector.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="View\MachinePicker.xaml">
+    <Page Include="View\MainWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="View\MachinePickerTestWindow.xaml">
+    <Page Include="View\NewRequest.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="View\MachineViewer.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="View\MachineWriter.xaml">
+    <Page Include="View\NodeViewer.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\ControlMAgent\ControlM.csproj">
-      <Project>{be1af7f3-ef1d-4433-9fd8-98d7d5d7f283}</Project>
-      <Name>ControlM</Name>
-    </ProjectReference>
+    <Content Include="Database\cmmgui_schema.accdb">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

@@ -1,4 +1,4 @@
-﻿<Window x:Class="ControlM_Manager_GUI.View.MachineWriter"
+﻿<Window x:Class="ControlM_Manager_GUI.View.NodeViewer"
         x:Name="window"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
@@ -35,7 +35,7 @@
             <Setter Property="Validation.ErrorTemplate" Value="{StaticResource ValidationTemplate}"/>
             <Setter Property="FontFamily" Value="Cascadia Code"/>
             <Setter Property="FontSize" Value="22"/>
-            <Setter Property="Grid.ColumnSpan" Value="4"/>
+            <Setter Property="Grid.ColumnSpan" Value="5"/>
             <Setter Property="Grid.Column" Value="2"/>
             <Setter Property="Margin" Value="6"/>
             <Setter Property="VerticalContentAlignment" Value="Center"/>
@@ -51,34 +51,36 @@
             <Setter Property="TextAlignment" Value="Center"/>
         </Style>
     </Window.Resources>
-    <Grid x:Name="OuterWrapper" Width="798" Height="444" DataContext="{Binding ElementName=window}">
+    <Grid x:Name="OuterWrapper" Width="830" Height="444" DataContext="{Binding ElementName=window}">
         <Grid.RowDefinitions>
-            <RowDefinition/>
-            <RowDefinition/>
-            <RowDefinition/>
-            <RowDefinition/>
-            <RowDefinition/>
-            <RowDefinition/>
-            <RowDefinition/>
-            <RowDefinition/>
-            <RowDefinition/>
-            <RowDefinition/>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="1*"/>
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition/>
-            <ColumnDefinition/>
-            <ColumnDefinition/>
-            <ColumnDefinition/>
-            <ColumnDefinition/>
-            <ColumnDefinition/>
+            <ColumnDefinition Width="1*"/>
+            <ColumnDefinition Width="1*"/>
+            <ColumnDefinition Width="1*"/>
+            <ColumnDefinition Width="1*"/>
+            <ColumnDefinition Width="1*"/>
+            <ColumnDefinition Width="1*"/>
+            <ColumnDefinition Width="1*"/>
+            <ColumnDefinition Width="0.2*"/>
         </Grid.ColumnDefinitions>
-        <Label Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="6" Grid.RowSpan="2"
+        <Label Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="8" Grid.RowSpan="2"
                HorizontalAlignment="Center" FontSize="37" FontWeight="DemiBold">
             新規ノードを追加
         </Label>
         <TextBox x:Name="txbHostname" Grid.Row="2" Style="{StaticResource MonoFontTxbBase}">
             <TextBox.Text>
-                <Binding Path="Hostname"
+                <Binding Path="DisplayedNode/HostsEntries"
                          UpdateSourceTrigger="PropertyChanged">
                     <Binding.ValidationRules>
                         <model:MachinViewerTxbRule 
@@ -139,12 +141,12 @@
         </TextBox>
         <TextBlock Grid.Row="5">IPv6</TextBlock>
         <customcontrols:OSInfoSelector x:Name="osSelector" Grid.Column="2" 
-                                       Grid.Row="6" Grid.ColumnSpan="4" Grid.RowSpan="2"
+                                       Grid.Row="6" Grid.ColumnSpan="5" Grid.RowSpan="2"
                                        FontSize="18"/>
         <TextBlock Grid.Row="6">OS Info</TextBlock>
 
-        <Grid Margin="6" Height="47"
-            Grid.Row="8" Grid.ColumnSpan="6" Grid.RowSpan="2">
+        <Grid Margin="16 0" Height="47"
+            Grid.Row="8" Grid.ColumnSpan="8" Grid.RowSpan="2">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="5*"/>
                 <ColumnDefinition Width="1*"/>

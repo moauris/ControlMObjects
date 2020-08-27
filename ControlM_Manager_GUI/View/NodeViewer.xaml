@@ -1,0 +1,46 @@
+﻿<Window x:Class="ControlM_Manager_GUI.View.NodeViewer"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:ControlM_Manager_GUI.View"
+        xmlns:customcontrols="clr-namespace:ControlM_Manager_GUI.CustomControls"
+        mc:Ignorable="d"
+        Title="NodeViewer" Height="450" Width="800" SizeToContent="Height">
+    <StackPanel Orientation="Vertical">
+        <TextBlock TextAlignment="Center" HorizontalAlignment="Center"
+            Text="Node Information" FontSize="24"/>
+        <customcontrols:HostEntryInputBoxGroup/>
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="1*"/>
+                <ColumnDefinition Width="560"/>
+                <ColumnDefinition Width="1*"/>
+            </Grid.ColumnDefinitions>
+            <Expander Header="Cluster Structure Info"
+                      Grid.Column="1">
+                <StackPanel Orientation="Vertical">
+                    <customcontrols:HostEntryInputBoxGroup/>
+                    <customcontrols:HostEntryInputBoxGroup/>
+                </StackPanel>
+            </Expander>
+        </Grid>
+        <TextBlock TextAlignment="Center" HorizontalAlignment="Center"
+            Text="Node OS Information" FontSize="24"/>
+        <customcontrols:OSInfoSelector/>
+        <Grid Margin="20 20">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="1*"/>
+                <ColumnDefinition Width="1.5*"/>
+                <ColumnDefinition Width="1*"/>
+                <ColumnDefinition Width="1.5*"/>
+                <ColumnDefinition Width="1*"/>
+                <ColumnDefinition Width="1.5*"/>
+                <ColumnDefinition Width="1*"/>
+            </Grid.ColumnDefinitions>
+            <Button Content="Update" Grid.Column="1" Height="30"/>
+            <Button Content="Close" Grid.Column="3" Height="30"/>
+            <Button Content="Print" Grid.Column="5" Height="30" Click="ButtonPrintClicked"/>
+        </Grid>
+    </StackPanel>
+</Window>

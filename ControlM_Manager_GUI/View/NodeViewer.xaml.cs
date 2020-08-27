@@ -15,13 +15,22 @@ using System.Windows.Shapes;
 namespace ControlM_Manager_GUI.View
 {
     /// <summary>
-    /// Interaction logic for MachinePicker.xaml
+    /// Interaction logic for NodeViewer.xaml
     /// </summary>
-    public partial class MachinePicker : Window
+    public partial class NodeViewer : Window
     {
-        public MachinePicker()
+        public NodeViewer()
         {
             InitializeComponent();
+        }
+
+        private void ButtonPrintClicked(object sender, RoutedEventArgs e)
+        {
+            PrintDialog printDialog = new PrintDialog();
+            if (printDialog.ShowDialog() == true)
+            {
+                printDialog.PrintVisual(this, "Printing Node Viewer");
+            }
         }
     }
 }
