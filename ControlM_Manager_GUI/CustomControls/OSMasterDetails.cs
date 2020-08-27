@@ -7,6 +7,7 @@ using System.Collections.ObjectModel;
 using System.Data.OleDb;
 using System.Data;
 using System.Diagnostics;
+using System.IO;
 
 namespace ControlM_Manager_GUI.CustomControls
 {
@@ -51,8 +52,14 @@ namespace ControlM_Manager_GUI.CustomControls
         /// </summary>
         public OSNameList()
         {
-            string conn_str = @"Provider=Microsoft.ACE.OLEDB.12.0;Data Source=C:\Users\40137\source\repos\ControlMManager\accessdb_driver\Assets\cmmgui_schema.accdb;Persist Security Info=True";
-
+            FileInfo databaseDir = new FileInfo(Directory.GetCurrentDirectory() + @"\Database\cmmgui_schema.accdb");
+            Debug.Print(Directory.GetCurrentDirectory());
+            string conn_str_format = @"Provider=Microsoft.ACE.OLEDB.12.0;Data Source={0};Persist Security Info=True";
+            if (!databaseDir.Exists)
+            { 
+                throw new Exception(string.Format("Database file not found in {0}, please check.", databaseDir.FullName));
+            }
+            string conn_str = string.Format(conn_str_format, databaseDir.FullName);
             using (OleDbConnection conn = new OleDbConnection(conn_str))
             {
                 conn.Open();

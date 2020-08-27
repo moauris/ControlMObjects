@@ -29,7 +29,8 @@
         </Grid.RowDefinitions>
         <ComboBox x:Name="cbxOSname" Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="4"
                   Style="{StaticResource CbxStyleDefault}" 
-                  ItemsSource="{Binding}" SelectedValue="">
+                  ItemsSource="{Binding}" 
+                  SelectedIndex="-1">
             <ComboBox.ItemTemplate>
                 <DataTemplate>
                     <TextBlock Text="{Binding}"/>
@@ -38,6 +39,7 @@
         </ComboBox>
         <ComboBox x:Name="cbxOSversion" Grid.Column="0" Grid.Row="1" Grid.ColumnSpan="3"
                   Style="{StaticResource CbxStyleDefault}"
+                  SelectedIndex="-1"
                   ItemsSource="{Binding Path=osVersionList}">
             <ComboBox.ItemTemplate>
                 <DataTemplate>
@@ -47,6 +49,7 @@
         </ComboBox>
         <ComboBox x:Name="cbxOSarchitecture" Grid.Column="3" Grid.Row="1"
                   Style="{StaticResource CbxStyleDefault}"
+                  SelectedIndex="-1"
                   ItemsSource="{Binding Path=osVersionList/osArchitectureList}">
             <ComboBox.ItemTemplate>
                 <DataTemplate>
